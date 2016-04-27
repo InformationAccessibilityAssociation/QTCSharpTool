@@ -90,5 +90,25 @@ namespace QTCSharpTool
             }
             return (sb.ToString());
         }
+
+
+        public static string md5(this string text)
+        {
+            return text.md5(System.Text.Encoding.GetEncoding("gb2312"));
+        }
+
+        public static string md5(this string text, System.Text.Encoding withencoding)
+        {
+            var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] emailBytes = withencoding.GetBytes(text.ToLower());
+            byte[] hashedEmailBytes = md5.ComputeHash(emailBytes);
+            StringBuilder sb = new StringBuilder();
+            foreach (var b in hashedEmailBytes)
+            {
+                sb.Append(b.ToString("x2").ToLower());
+            }
+            return sb.ToString();
+        }
+
     }
 }
