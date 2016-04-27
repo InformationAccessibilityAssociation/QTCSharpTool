@@ -5,6 +5,9 @@ using System.Text;
 using System.Runtime.InteropServices;
 namespace QTCSharpTool
 {
+    /// <summary>
+    /// cookie操作累
+    /// </summary>
     public static class Cookie
     {
 

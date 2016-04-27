@@ -57,6 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cookie.cs" />
+    <Compile Include="HotKey.cs" />
     <Compile Include="ini.cs" />
     <Compile Include="methodex.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

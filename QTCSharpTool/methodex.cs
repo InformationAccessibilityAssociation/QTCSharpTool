@@ -4,7 +4,7 @@ using System.Text;
 namespace QTCSharpTool
 {
     /// <summary>
-    /// string扩展方法
+    /// string类的扩展方法
     /// </summary>
     public static class QTCSharpToolmethodex
     {
@@ -12,14 +12,12 @@ namespace QTCSharpTool
         /// GB2312转换成UTF8
         /// </summary>
         /// <param name="text"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string gb2312_utf8(this string text)
         {
             //声明字符集   
             System.Text.Encoding utf8, gb2312;
-            //gb2312   
             gb2312 = System.Text.Encoding.GetEncoding("gb2312");
-            //utf8   
             utf8 = System.Text.Encoding.GetEncoding("utf-8");
             byte[] gb;
             gb = gb2312.GetBytes(text);
@@ -32,14 +30,12 @@ namespace QTCSharpTool
         /// UTF8转换成GB2312
         /// </summary>
         /// <param name="text"></param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string utf8_gb2312(this string text)
         {
             //声明字符集   
             System.Text.Encoding utf8, gb2312;
-            //utf8   
             utf8 = System.Text.Encoding.GetEncoding("utf-8");
-            //gb2312   
             gb2312 = System.Text.Encoding.GetEncoding("gb2312");
             byte[] utf;
             utf = utf8.GetBytes(text);
@@ -54,7 +50,7 @@ namespace QTCSharpTool
         /// <param name="text"></param>
         /// <param name="oenc">原编码</param>
         /// <param name="nenc">目标编码</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string EncodingConvert(this string text, System.Text.Encoding oenc, System.Text.Encoding nenc)
         {
             byte[] bytes;
@@ -68,7 +64,7 @@ namespace QTCSharpTool
         /// URL编码（默认GB2312）
         /// </summary>
         /// <param name="text">需要转换的字符串</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string UrlEncode(this string text)
         {
             return text.UrlEncode(System.Text.Encoding.GetEncoding("gb2312"));
@@ -78,8 +74,8 @@ namespace QTCSharpTool
         /// URL编码
         /// </summary>
         /// <param name="text"></param>
-        /// <param name="withencoding"></param>
-        /// <returns></returns>
+        /// <param name="withencoding">预转换字符串的编码</param>
+        /// <returns>string</returns>
         public static string UrlEncode(this string text, System.Text.Encoding withencoding)
         {
             StringBuilder sb = new StringBuilder();
@@ -91,12 +87,21 @@ namespace QTCSharpTool
             return (sb.ToString());
         }
 
-
+/// <summary>
+/// 返回string的md5值
+/// </summary>
+/// <param name="text"></param>
+/// <returns>string</returns>
         public static string md5(this string text)
         {
             return text.md5(System.Text.Encoding.GetEncoding("gb2312"));
         }
-
+        /// <summary>
+        /// 按指定编码返回string的md5值
+        /// </summary>
+        /// <param name="text"></param>
+        /// <param name="withencoding"预转换字符串的编码></param>
+        /// <returns>string</returns>
         public static string md5(this string text, System.Text.Encoding withencoding)
         {
             var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();

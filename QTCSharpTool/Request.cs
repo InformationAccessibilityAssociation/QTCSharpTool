@@ -1,8 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Net;
-using System.Windows.Forms;
-
 
 namespace QTCSharpTool
 {
@@ -15,21 +13,30 @@ namespace QTCSharpTool
         ///  GET方法获取远程数据，默认UTF-8编码       
         /// </summary>
         /// <param name="url">URL地址</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string get(string url)
         {
             return wr("GET", url, "", "utf-8", "");
         }
+
         /// <summary>
         /// GET方法获取远程数据，手动指定编码
         /// </summary>
         /// <param name="url">URL地址</param>
         /// <param name="EncodingBodyName">目标网页编码</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string get(string url, string EncodingBodyName)
         {
             return wr("GET", url, "", EncodingBodyName, "");
         }
+
+        /// <summary>
+        /// GET方法获取远程数据，手动指定编码和cookies
+        /// </summary>
+        /// <param name="url">地址</param>
+        /// <param name="EncodingBodyName">目标网页编码</param>
+        /// <param name="Cookies">cookies</param>
+        /// <returns>string</returns>
         public static string get(string url, string EncodingBodyName, string Cookies)
         {
             return wr("GET", url, "", EncodingBodyName, Cookies);
@@ -40,7 +47,7 @@ namespace QTCSharpTool
         /// </summary>
         /// <param name="url">URL地址</param>
         /// <param name="data">需要提交的数据</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string post(string url, string data)
         {
             return wr("POST", url, data, "utf-8", "");
@@ -52,11 +59,19 @@ namespace QTCSharpTool
         /// <param name="url">URL地址</param>
         /// <param name="data">需要提交的数据</param>
         /// <param name="EncodingBodyName">目标网页编码</param>
-        /// <returns></returns>
+        /// <returns>string</returns>
         public static string post(string url, string data, string EncodingBodyName)
         {
             return wr("POST", url, data, EncodingBodyName, "");
         }
+        /// <summary>
+        /// POST方法获取远程数据，手动指定编码和cookies
+        /// </summary>
+        /// <param name="url">地址</param>
+        /// <param name="data">需要提交的数据</param>
+        /// <param name="EncodingBodyName">目标网页编码</param>
+        /// <param name="Cookies">cookies</param>
+        /// <returns>string</returns>
         public static string post(string url, string data, string EncodingBodyName, string Cookies)
         {
             return wr("POST", url, data, EncodingBodyName, Cookies);
@@ -74,7 +89,7 @@ namespace QTCSharpTool
             webRequest.UserAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; Trident/7.0; rv:11.0) like Gecko";
             webRequest.Timeout = 20000;
             webRequest.UseDefaultCredentials = true;
-          if(!string.IsNullOrEmpty(Cookies))  webRequest.Headers.Add("Cookie", Cookies);
+            if (!string.IsNullOrEmpty(Cookies)) webRequest.Headers.Add("Cookie", Cookies);
             if (method == "POST" || method == "PUT")
             {
                 if (method == "PUT")
@@ -83,32 +98,20 @@ namespace QTCSharpTool
                     webRequest.Method = "PUT";
                 }
                 else
+                {
                     webRequest.ContentType = "application/x-www-form-urlencoded";
-                //webRequest.ContentType = "multipart/form-data";
-
+                    //webRequest.ContentType = "multipart/form-data";
+                }
                 //POST the data.
-                requestWriter = new StreamWriter(webRequest.GetRequestStream());
-                try
+                using (requestWriter = new StreamWriter(webRequest.GetRequestStream()))
                 {
                     requestWriter.Write(postData);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-                finally
-                {
-                    requestWriter.Close();
-                    requestWriter = null;
                 }
             }
 
             responseData = WebResponseGet(webRequest, EncodingBodyName);
-
             webRequest = null;
-
             return responseData;
-
         }
 
         private static string WebResponseGet(HttpWebRequest webRequest, string EncodingBodyName)
@@ -123,6 +126,11 @@ namespace QTCSharpTool
             return responseData;
         }
 
+        /// <summary>
+        /// 获取cookies，但在某些情况下并不能获得完整的cookies
+        /// </summary>
+        /// <param name="url">需要获取cookie的url</param>
+        /// <returns>string</returns>
         public static string GetCookie(string url)
         {
             CookieContainer cookies = new CookieContainer();

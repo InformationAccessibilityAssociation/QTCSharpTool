@@ -11,8 +11,9 @@ namespace example
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("abc".md5());
-
+            string a = "abc";
+            Console.WriteLine(a.md5());
+            Console.WriteLine(a.UrlEncode());
         }
     }
 }

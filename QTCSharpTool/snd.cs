@@ -5,6 +5,9 @@ using System.Text;
 using System.IO;
 namespace QTCSharpTool
 {
+    /// <summary>
+    /// 简单提示音，可将wav格式的声音文件存放到snd目录下
+    /// </summary>
     public static class snd
     {
         public static void begin()

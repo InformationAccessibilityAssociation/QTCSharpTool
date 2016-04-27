@@ -5,6 +5,9 @@ using System.Text;
 
 namespace QTCSharpTool
 {
+    /// <summary>
+    /// 搜索历史操作类
+    /// </summary>
     public class Suggestion
     {
         public string FileName;

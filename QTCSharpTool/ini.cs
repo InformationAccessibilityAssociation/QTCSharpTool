@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace QTCSharpTool
 {
     /// <summary>
-    /// 读写INI文件的类。
+    /// 读写INI文件
     /// </summary>
     public static class ini
     {
