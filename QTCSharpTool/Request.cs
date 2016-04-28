@@ -82,7 +82,6 @@ namespace QTCSharpTool
             HttpWebRequest webRequest = null;
             StreamWriter requestWriter = null;
             string responseData = "";
-
             webRequest = System.Net.WebRequest.Create(url) as HttpWebRequest;
             webRequest.Method = method;
             //webRequest.ServicePoint.Expect100Continue = false;
@@ -111,6 +110,7 @@ namespace QTCSharpTool
 
             responseData = WebResponseGet(webRequest, EncodingBodyName);
             webRequest = null;
+
             return responseData;
         }
 

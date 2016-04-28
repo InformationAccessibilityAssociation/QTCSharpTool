@@ -14,6 +14,15 @@ namespace example
             string a = "abc";
             Console.WriteLine(a.md5());
             Console.WriteLine(a.UrlEncode());
+            Console.WriteLine(Environment.CurrentDirectory.md5());
+            try
+            {
+                string html = Request.get("http://qt.hk/contact/", "qthkabc");
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.Message);
+            }
         }
     }
 }
